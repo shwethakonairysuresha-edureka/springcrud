@@ -7,32 +7,39 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.tcs.employee.model.Department;
 import com.tcs.employee.model.Employee;
 import com.tcs.employee.utils.DBUtils;
 
+@Repository
 public class DepartmentDAOImpl implements DepartmentDAO {
 	
-	private DepartmentDAOImpl()
-	{
-	}
+	@Autowired
+	DBUtils dbUtils;	
 	
-	private static DepartmentDAO dao;
-	
-	public static DepartmentDAO getInstance()
-	{
-		if(dao == null)
-			{
-				dao = new DepartmentDAOImpl();
-				return dao;
-			}
-			return dao;
-	}
+//	private DepartmentDAOImpl()
+//	{
+//	}
+//	
+//	private static DepartmentDAO dao;
+//	
+//	public static DepartmentDAO getInstance()
+//	{
+//		if(dao == null)
+//			{
+//				dao = new DepartmentDAOImpl();
+//				return dao;
+//			}
+//			return dao;
+//	}
 
 	@Override
 	public String addDepartment(Department department) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		String insertDepartment = "insert into DEPARTMENT(id,organizationId,name) values(?,?,?)";
@@ -68,14 +75,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 
 	@Override
 	public String updateDepartment(Department department) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
         PreparedStatement preparedStatement = null;
         int result = 0;
 
@@ -104,14 +111,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
             return "fail";
         }
         finally {
-            DBUtils.closeConnection(connection);
+        	dbUtils.closeConnection(connection);
         }
 	}
 
 	@Override
 	public String deleteDepartment(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int resultSet = 0;
 		int result = 0;
@@ -141,14 +148,14 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 			return "fail";
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 
 	@Override
 	public Optional<Department> findById(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Department department = null;
@@ -180,7 +187,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.of(department);
 	}
@@ -188,7 +195,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	@Override
 	public Optional<List<Department>> getDepartments() {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Department department = null;
@@ -224,7 +231,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 			return Optional.empty();
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}		
 		return Optional.empty();
 	}
@@ -232,7 +239,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	@Override
 	public Optional<List<Department>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Department department = null;
@@ -272,7 +279,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.empty();
 	}

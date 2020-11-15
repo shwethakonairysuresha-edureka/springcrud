@@ -3,29 +3,34 @@ package com.tcs.employee.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tcs.employee.dao.OrganizationDAO;
 import com.tcs.employee.dao.OrganizationDAOImpl;
 import com.tcs.employee.model.Organization;
 
+@Service
 public class OrganizationServiceImpl implements OrganizationService {
 	
-	private OrganizationServiceImpl()
-	{
-	}
+//	private OrganizationServiceImpl()
+//	{
+//	}
+//	
+//	private static OrganizationService dao;
+//	
+//	public static OrganizationService getInstance()
+//	{
+//		if(dao == null)
+//		{
+//			dao = new OrganizationServiceImpl();
+//			return dao;
+//		}
+//		return dao;
+//	}
 	
-	private static OrganizationService dao;
-	
-	public static OrganizationService getInstance()
-	{
-		if(dao == null)
-		{
-			dao = new OrganizationServiceImpl();
-			return dao;
-		}
-		return dao;
-	}
-	
-	OrganizationDAO organizationDao = OrganizationDAOImpl.getInstance();
+	@Autowired
+	private OrganizationDAO organizationDao;
 
 	@Override
 	public String addOrganization(Organization organization) {

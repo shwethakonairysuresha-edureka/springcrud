@@ -3,29 +3,34 @@ package com.tcs.employee.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tcs.employee.dao.DepartmentDAO;
 import com.tcs.employee.dao.DepartmentDAOImpl;
 import com.tcs.employee.model.Department;
 
+@Service
 public class DepartmentServiceImpl implements DepartmentService {
 	
-	private DepartmentServiceImpl()
-	{
-	}
+//	private DepartmentServiceImpl()
+//	{
+//	}
+//	
+//	private static DepartmentService dao;
+//	
+//	public static DepartmentService getInstance()
+//	{
+//		if(dao == null)
+//		{
+//			dao = new DepartmentServiceImpl();
+//			return dao;
+//		}
+//		return dao;
+//	}
 	
-	private static DepartmentService dao;
-	
-	public static DepartmentService getInstance()
-	{
-		if(dao == null)
-		{
-			dao = new DepartmentServiceImpl();
-			return dao;
-		}
-		return dao;
-	}
-	
-	DepartmentDAO departmentDao = DepartmentDAOImpl.getInstance();
+	@Autowired
+	private DepartmentDAO departmentDao;
 
 	@Override
 	public String addDepartment(Department department) {

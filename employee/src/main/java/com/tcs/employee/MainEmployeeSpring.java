@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.tcs.employee.dao.EmployeeDAO;
-import com.tcs.employee.dao.EmployeeDAOImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.tcs.employee.config.DBConfig;
 import com.tcs.employee.model.Employee;
 import com.tcs.employee.service.EmployeeService;
 import com.tcs.employee.service.EmployeeServiceImpl;
 
-public class MainEmployee {
+public class MainEmployeeSpring {
 
 	public static void displayMenu(int opts[], String items[])
 	{
@@ -49,96 +50,58 @@ public class MainEmployee {
 			if(choice == options[0])
 			{
 				System.out.println("Add Emlopyee");
-				Employee employee = new Employee(3, 03, 003, "Sakura", 22, "Associate");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
+				Employee employee = new Employee(5, 05, 005, "Shinchan", 26, "Intern");
 				String result = employeeService.addEmployee(employee);
-				
-				if("success".equals(result))
-				{
-					System.out.println("record added successfully");
-				}
-				else
-				{
-					System.out.println("Failed");
-				}
+				System.out.println(result);
+				context.close();
 			}
 			else if(choice == options[1])
 			{
 				System.out.println("Update Emlopyee");
-				Employee employee = new Employee(3, 03, 003, "Sasuke", 24, "Contract");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
+				Employee employee = new Employee(3, 03, 003, "Sasuke", 26, "Intern");
 				String result = employeeService.updateEmployee(employee);
-				
-				if("success".equals(result))
-				{
-					System.out.println("record updated successfully");
-				}
-				else
-				{
-					System.out.println("Failed");
-				}
+				System.out.println(result);
+				context.close();
 			}
 			else if(choice == options[2])
 			{
 				System.out.println("Delete Emlopyee");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
-				String result = employeeService.deleteEmployee(3);
-				
-				if("success".equals(result))
-				{
-					System.out.println("record deleted successfully");
-				}
-				else
-				{
-					System.out.println("Failed");
-				}
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
+				String result = employeeService.deleteEmployee(5);
+				System.out.println(result);
+				context.close();	
 			}
 			else if(choice == options[3])
 			{
 				System.out.println("Find By Id");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
-				Optional<Employee> optional = employeeService.findById(1);
-				
-				if(optional.isPresent())
-				{
-					Employee employee = optional.get();
-					System.out.println(employee);
-				}
-				else
-				{
-					System.out.println("Employee is not available");
-				}
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
+				Optional<Employee> result = employeeService.findById(1);
+				System.out.println(result);
+				context.close();		
 			}
 			else if(choice == options[4])
 			{
 				System.out.println("Get Employees");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
 				Optional<List<Employee>> result = employeeService.getEmployees();
-				
-				if("success".equals(result))
-				{
-					System.out.println("records retrieved successfully");
-				}
-				else
-				{
-					System.out.println("Failed");
-				}
+				System.out.println(result);
+				context.close();	
 			}
 			else if(choice == options[5])
 			{
 				System.out.println("Find By OrganizationId");
-				EmployeeService employeeService = EmployeeServiceImpl.getInstance();
-				Optional<List<Employee>> optional = employeeService.findByOrganizationId(01);
-				
-				if(optional.isPresent())
-				{
-					List<Employee> employee = optional.get();
-					System.out.println(employee);
-				}
-				else
-				{
-					System.out.println("Employee is not available");
-				}
+				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
+				EmployeeService employeeService = context.getBean(EmployeeService.class);
+				Optional<List<Employee>> result = employeeService.findByOrganizationId(1);
+				System.out.println(result);
+				context.close();		
 			}
 			
 			//Display Menu
@@ -149,5 +112,4 @@ public class MainEmployee {
 		}
 		System.out.println("GoodBye!");
 	}
-
 }

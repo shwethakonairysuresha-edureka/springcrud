@@ -7,31 +7,38 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.tcs.employee.model.Employee;
 import com.tcs.employee.utils.DBUtils;
 
+@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 	
-	private EmployeeDAOImpl()
-	{
-	}
+	@Autowired
+	DBUtils dbUtils;
 	
-	private static EmployeeDAO dao;
-	
-	public static EmployeeDAO getInstance()
-	{
-		if(dao == null)
-			{
-				dao = new EmployeeDAOImpl();
-				return dao;
-			}
-			return dao;
-	}
+//	private EmployeeDAOImpl()
+//	{
+//	}
+//	
+//	private static EmployeeDAO dao;
+//	
+//	public static EmployeeDAO getInstance()
+//	{
+//		if(dao == null)
+//			{
+//				dao = new EmployeeDAOImpl();
+//				return dao;
+//			}
+//			return dao;
+//	}
 	
 	@Override
 	public String addEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		String insertEmployee = "insert into EMPLOYEE(id,organizationId,departmentId,name,age,position) values(?,?,?,?,?,?)";
@@ -70,14 +77,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 	
 	@Override
 	public String updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
         PreparedStatement preparedStatement = null;
         int result = 0;
 
@@ -109,14 +116,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             return "fail";
         }
         finally {
-            DBUtils.closeConnection(connection);
+        	dbUtils.closeConnection(connection);
         }
     }
 
 	@Override
 	public String deleteEmployee(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int resultSet = 0;
 		int result = 0;
@@ -146,14 +153,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return "fail";
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 
 	@Override
 	public Optional<Employee> findById(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Employee employee = null;
@@ -188,7 +195,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.of(employee);
 	}
@@ -196,7 +203,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public Optional<List<Employee>> getEmployees() {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Employee employee = null;
@@ -241,7 +248,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			return Optional.empty();
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}		
 		return Optional.empty();
 	}
@@ -249,7 +256,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public Optional<List<Employee>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Employee employee = null;
@@ -298,7 +305,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.empty();
 	}

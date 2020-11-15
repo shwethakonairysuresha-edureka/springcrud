@@ -3,29 +3,34 @@ package com.tcs.employee.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.tcs.employee.dao.EmployeeDAO;
 import com.tcs.employee.dao.EmployeeDAOImpl;
 import com.tcs.employee.model.Employee;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	private EmployeeServiceImpl()
-	{
-	}
+//	private EmployeeServiceImpl()
+//	{
+//	}
+//	
+//	private static EmployeeService dao;
+//	
+//	public static EmployeeService getInstance()
+//	{
+//		if(dao == null)
+//		{
+//			dao = new EmployeeServiceImpl();
+//			return dao;
+//		}
+//		return dao;
+//	}
 	
-	private static EmployeeService dao;
-	
-	public static EmployeeService getInstance()
-	{
-		if(dao == null)
-		{
-			dao = new EmployeeServiceImpl();
-			return dao;
-		}
-		return dao;
-	}
-	
-	EmployeeDAO employeeDao = EmployeeDAOImpl.getInstance();
+	@Autowired
+	private EmployeeDAO employeeDao;
 	
 	@Override
 	public String addEmployee(Employee employee) {

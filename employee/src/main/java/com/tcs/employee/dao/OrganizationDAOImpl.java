@@ -7,32 +7,39 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.tcs.employee.model.Department;
 import com.tcs.employee.model.Organization;
 import com.tcs.employee.utils.DBUtils;
 
+@Repository
 public class OrganizationDAOImpl implements OrganizationDAO {
 	
-	private OrganizationDAOImpl()
-	{
-	}
+	@Autowired
+	DBUtils dbUtils;
 	
-	private static OrganizationDAO dao;
-	
-	public static OrganizationDAO getInstance()
-	{
-		if(dao == null)
-			{
-				dao = new OrganizationDAOImpl();
-				return dao;
-			}
-			return dao;
-	}
+//	private OrganizationDAOImpl()
+//	{
+//	}
+//	
+//	private static OrganizationDAO dao;
+//	
+//	public static OrganizationDAO getInstance()
+//	{
+//		if(dao == null)
+//			{
+//				dao = new OrganizationDAOImpl();
+//				return dao;
+//			}
+//			return dao;
+//	}
 
 	@Override
 	public String addOrganization(Organization organization) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		String insertEmployee = "insert into ORGANIZATION(id,name,address) values(?,?,?)";
@@ -68,14 +75,14 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 
 	@Override
 	public String updateOrganization(Organization organization) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
         PreparedStatement preparedStatement = null;
         int result = 0;
 
@@ -104,14 +111,14 @@ public class OrganizationDAOImpl implements OrganizationDAO {
             return "fail";
         }
         finally {
-            DBUtils.closeConnection(connection);
+        	dbUtils.closeConnection(connection);
         }
 	}
 
 	@Override
 	public String deleteOrganization(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		int resultSet = 0;
 		int result = 0;
@@ -141,14 +148,14 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 			return "fail";
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 	}
 
 	@Override
 	public Optional<Organization> findById(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Organization organization = null;
@@ -180,7 +187,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.of(organization);
 	}
@@ -188,7 +195,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 	@Override
 	public Optional<List<Organization>> getOrganization() {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Organization organization = null;
@@ -224,7 +231,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 			return Optional.empty();
 		}
 		finally {
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}		
 		return Optional.empty();
 	}
@@ -232,7 +239,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 	@Override
 	public Optional<List<Organization>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		Connection connection = DBUtils.getConnection();
+		Connection connection = dbUtils.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Organization organization = null;
@@ -272,7 +279,7 @@ public class OrganizationDAOImpl implements OrganizationDAO {
 		}
 		finally
 		{
-			DBUtils.closeConnection(connection);
+			dbUtils.closeConnection(connection);
 		}
 		return Optional.empty();
 	}
