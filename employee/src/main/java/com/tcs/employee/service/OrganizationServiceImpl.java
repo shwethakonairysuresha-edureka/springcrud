@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.employee.dao.OrganizationDAO;
 import com.tcs.employee.dao.OrganizationDAOImpl;
 import com.tcs.employee.model.Organization;
+import com.tcs.employee.repository.OrganizationRepository;
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
@@ -29,43 +30,64 @@ public class OrganizationServiceImpl implements OrganizationService {
 //		return dao;
 //	}
 	
+//	@Autowired
+//	private OrganizationDAO organizationDao;
+	
 	@Autowired
-	private OrganizationDAO organizationDao;
+	OrganizationRepository organizationRepository;
 
 	@Override
 	public String addOrganization(Organization organization) {
 		// TODO Auto-generated method stub
-		return organizationDao.addOrganization(organization);
+		Organization organization2 = null;
+		try
+		{
+			organization2 = organizationRepository.save(organization);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String updateOrganization(Organization organization) {
 		// TODO Auto-generated method stub
-		return organizationDao.updateOrganization(organization);
+		Organization organization2 = null;
+		try
+		{
+			organization2 = organizationRepository.save(organization);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String deleteOrganization(int id) {
 		// TODO Auto-generated method stub
-		return organizationDao.deleteOrganization(id);
+		return null;
 	}
 
 	@Override
 	public Optional<Organization> findById(int id) {
 		// TODO Auto-generated method stub
-		return organizationDao.findById(id);
+		return null;
 	}
 
 	@Override
 	public Optional<List<Organization>> getOrganization() {
 		// TODO Auto-generated method stub
-		return organizationDao.getOrganization();
+		return null;
 	}
 
 	@Override
 	public Optional<List<Organization>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		return organizationDao.findByOrganizationId(id);
+		return null;
 	}
 
 }

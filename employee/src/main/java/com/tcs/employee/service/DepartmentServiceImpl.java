@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.employee.dao.DepartmentDAO;
 import com.tcs.employee.dao.DepartmentDAOImpl;
 import com.tcs.employee.model.Department;
+import com.tcs.employee.repository.DepartmentRepository;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -29,43 +30,64 @@ public class DepartmentServiceImpl implements DepartmentService {
 //		return dao;
 //	}
 	
+//	@Autowired
+//	private DepartmentDAO departmentDao;
+	
 	@Autowired
-	private DepartmentDAO departmentDao;
+	DepartmentRepository departmentRepository;
 
 	@Override
 	public String addDepartment(Department department) {
 		// TODO Auto-generated method stub
-		return departmentDao.addDepartment(department);
+		Department department2 = null;
+		try
+		{
+			department2 = departmentRepository.save(department);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String updateDepartment(Department department) {
 		// TODO Auto-generated method stub
-		return departmentDao.updateDepartment(department);
+		Department department2 = null;
+		try
+		{
+			department2 = departmentRepository.save(department);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String deleteDepartment(int id) {
 		// TODO Auto-generated method stub
-		return departmentDao.deleteDepartment(id);
+		return null;
 	}
 
 	@Override
 	public Optional<Department> findById(int id) {
 		// TODO Auto-generated method stub
-		return departmentDao.findById(id);
+		return null;
 	}
 
 	@Override
 	public Optional<List<Department>> getDepartments() {
 		// TODO Auto-generated method stub
-		return departmentDao.getDepartments();
+		return null;
 	}
 
 	@Override
 	public Optional<List<Department>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		return departmentDao.findByOrganizationId(id);
+		return null;
 	}
 
 }

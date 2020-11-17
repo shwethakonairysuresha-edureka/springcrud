@@ -52,7 +52,7 @@ public class MainEmployeeSpring {
 				System.out.println("Add Emlopyee");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				EmployeeService employeeService = context.getBean(EmployeeService.class);
-				Employee employee = new Employee(5, 05, 005, "Shinchan", 26, "Intern");
+				Employee employee = new Employee(2, 02, 002, "Kakashi", 26, "Associate");
 				String result = employeeService.addEmployee(employee);
 				System.out.println(result);
 				context.close();
@@ -62,7 +62,7 @@ public class MainEmployeeSpring {
 				System.out.println("Update Emlopyee");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				EmployeeService employeeService = context.getBean(EmployeeService.class);
-				Employee employee = new Employee(3, 03, 003, "Sasuke", 26, "Intern");
+				Employee employee = new Employee(2, 02, 002, "Sasuke", 26, "Intern");
 				String result = employeeService.updateEmployee(employee);
 				System.out.println(result);
 				context.close();

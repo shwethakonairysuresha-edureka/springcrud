@@ -53,7 +53,7 @@ public class MainDepartmentSpring {
 				System.out.println("Add Department");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				DepartmentService departmentService = context.getBean(DepartmentService.class);
-				Department department = new Department(3, 03, "Physics", null);
+				Department department = new Department(3, 03, "Physics");
 				String result = departmentService.addDepartment(department);
 				System.out.println(result);
 				context.close();
@@ -63,7 +63,7 @@ public class MainDepartmentSpring {
 				System.out.println("Update Department");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				DepartmentService departmentService = context.getBean(DepartmentService.class);
-				Department department = new Department(3, 03, "Maths", null);
+				Department department = new Department(3, 03, "Maths");
 				String result = departmentService.updateDepartment(department);
 				System.out.println(result);
 				context.close();

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.tcs.employee.model.Employee;
 import com.tcs.employee.utils.DBUtils;
 
-@Repository
+//@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 	
 	@Autowired

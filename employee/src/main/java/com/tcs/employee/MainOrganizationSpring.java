@@ -53,7 +53,7 @@ public class MainOrganizationSpring {
 				System.out.println("Add Organization");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				OrganizationService organizationService = context.getBean(OrganizationService.class);
-				Organization organization = new Organization(3, "FOX", "123 Main St", null, null);
+				Organization organization = new Organization(3, "FOX", "123 Main St");
 				String result = organizationService.addOrganization(organization);
 				System.out.println(result);
 				context.close();
@@ -63,7 +63,7 @@ public class MainOrganizationSpring {
 				System.out.println("Update Organization");
 				AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfig.class);
 				OrganizationService organizationService = context.getBean(OrganizationService.class);
-				Organization organization = new Organization(3, "CNN", "123 Main St", null, null);
+				Organization organization = new Organization(3, "CNN", "456 Main St");
 				String result = organizationService.updateOrganization(organization);
 				System.out.println(result);
 				context.close();

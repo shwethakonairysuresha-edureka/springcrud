@@ -14,7 +14,7 @@ import com.tcs.employee.model.Department;
 import com.tcs.employee.model.Organization;
 import com.tcs.employee.utils.DBUtils;
 
-@Repository
+//@Repository
 public class OrganizationDAOImpl implements OrganizationDAO {
 	
 	@Autowired

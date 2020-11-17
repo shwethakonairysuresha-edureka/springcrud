@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.employee.dao.EmployeeDAO;
 import com.tcs.employee.dao.EmployeeDAOImpl;
 import com.tcs.employee.model.Employee;
+import com.tcs.employee.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -29,43 +30,64 @@ public class EmployeeServiceImpl implements EmployeeService {
 //		return dao;
 //	}
 	
+//	@Autowired
+//	private EmployeeDAO employeeDao;
+	
 	@Autowired
-	private EmployeeDAO employeeDao;
+	EmployeeRepository employeeRepository;
 	
 	@Override
 	public String addEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		return employeeDao.addEmployee(employee);
+		Employee employee2 = null;
+		try
+		{
+			employee2 = employeeRepository.save(employee);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
-		return employeeDao.updateEmployee(employee);
+		Employee employee2 = null;
+		try
+		{
+			employee2 = employeeRepository.save(employee);
+			return "success";
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 
 	@Override
 	public String deleteEmployee(int id) {
 		// TODO Auto-generated method stub
-		return employeeDao.deleteEmployee(id);
+		return null;
 	}
 
 	@Override
 	public Optional<Employee> findById(int id) {
 		// TODO Auto-generated method stub
-		return employeeDao.findById(id);
+		return null;
 	}
 
 	@Override
 	public Optional<List<Employee>> getEmployees() {
 		// TODO Auto-generated method stub
-		return employeeDao.getEmployees();
+		return null;
 	}
 
 	@Override
 	public Optional<List<Employee>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
-		return employeeDao.findByOrganizationId(id);
+		return null;
 	}
 
 }
