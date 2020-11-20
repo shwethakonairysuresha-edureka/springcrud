@@ -10,6 +10,7 @@ import com.tcs.employee.dao.DepartmentDAO;
 import com.tcs.employee.dao.DepartmentDAOImpl;
 import com.tcs.employee.model.Department;
 import com.tcs.employee.repository.DepartmentRepository;
+import com.tcs.employee.repository.OrganizationRepository;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -35,6 +36,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 	
 	@Autowired
 	DepartmentRepository departmentRepository;
+	
+	@Autowired
+	OrganizationRepository organizationRepository;
 
 	@Override
 	public String addDepartment(Department department) {
@@ -88,6 +92,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public Optional<List<Department>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String registerDepartment(Department department) {
+		// TODO Auto-generated method stub
+		if(departmentRepository.existsByName(department.getName())) {
+			return "existing department";
+		}
+		
+		Department department2 = departmentRepository.save(department);
+		return department2!=null?"success":"fail";
 	}
 
 }

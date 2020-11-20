@@ -1,8 +1,16 @@
 package com.tcs.employee.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,12 +24,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Employee {
 	@Id
-	@Column(name = "employee_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private int organizationId;
 	private int departmentId;
-	@Column(name = "employee_name")
 	private String name;
 	private int age;
 	private String position;
+	
+	@OneToMany(mappedBy = "employee" , fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+	private Set<Department> departments = new HashSet<>();	
 }

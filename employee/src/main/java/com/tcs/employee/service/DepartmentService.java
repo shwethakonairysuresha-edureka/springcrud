@@ -12,4 +12,6 @@ public interface DepartmentService {
 	public Optional<Department> findById(int id);
 	public Optional<List<Department>> getDepartments();
 	public Optional<List<Department>> findByOrganizationId(int id);
+	
+	public String registerDepartment(Department department);
 }

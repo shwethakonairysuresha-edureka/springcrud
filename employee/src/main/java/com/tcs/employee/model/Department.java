@@ -1,10 +1,19 @@
 package com.tcs.employee.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,10 +27,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Department {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "organization_id")
 	private int organizationId;
-	@Column(name = "department_name")
 	private String name;
     //private List<Employee> employees;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="employee_id")
+	private Employee employee;
+	
+	@ManyToMany
+	@JoinTable(name="department_organizations",joinColumns = @JoinColumn(name="department_id"),
+	inverseJoinColumns = @JoinColumn(name="organization_id"))
+	private Set<Organization> organizations = new HashSet<>();
 }
