@@ -13,5 +13,6 @@ import com.tcs.employee.model.Employee;
 public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
 	List<Department> findByEmployee(Employee employee, Sort sort);
+	
 	Boolean existsByName(String name);
 }

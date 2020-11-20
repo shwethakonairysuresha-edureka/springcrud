@@ -12,4 +12,6 @@ public interface EmployeeService {
 	public Optional<Employee> findById(int id);
 	public Optional<List<Employee>> getEmployees();
 	public Optional<List<Employee>> findByOrganizationId(int id);
+	
+	public void registerEmployee(Employee employee);
 }

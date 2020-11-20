@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.tcs.employee.dao.EmployeeDAO;
 import com.tcs.employee.dao.EmployeeDAOImpl;
 import com.tcs.employee.model.Employee;
+import com.tcs.employee.repository.DepartmentRepository;
 import com.tcs.employee.repository.EmployeeRepository;
 
 @Service
@@ -35,6 +36,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	DepartmentRepository departmentRepository;
 	
 	@Override
 	public String addEmployee(Employee employee) {
@@ -88,6 +92,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Optional<List<Employee>> findByOrganizationId(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void registerEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		Employee employee2 = employeeRepository.save(employee);
 	}
 
 }
